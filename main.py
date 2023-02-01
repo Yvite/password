@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 import string
+import sqlite3
 
 def generate_password(length):
     password = []
@@ -22,6 +23,12 @@ def generate_button_click():
             password = generate_password(length)
             password_label.config(text=password)
             message_label.config(text="Password generated successfully!", fg="green")
+            conn = sqlite3.connect("passwords.db")
+            cursor = conn.cursor()
+            cursor.execute("CREATE TABLE IF NOT EXISTS passwords (password text)")
+            cursor.execute("INSERT INTO passwords (password) VALUES (?)", (password,))
+            conn.commit()
+            conn.close()
     except ValueError:
         message_label.config(text="Invalid input. Enter a number for password length.", fg="red")
 
@@ -29,6 +36,17 @@ def clear_button_click():
     password_label.config(text="")
     message_label.config(text="")
     charlength.set("")
+
+show_password = False
+
+def reveal_button_click():
+    global show_password
+    if show_password:
+        password_label.config(text="*" * len(password_label["text"]))
+        show_password = False
+    else:
+        password_label.config(text=password)
+        show_password = True
 
 root = tk.Tk()
 root.geometry("400x150")
@@ -54,4 +72,6 @@ password_label.pack()
 message_label = tk.Label(root, text="", font=("Arial", 12), bg="white")
 message_label.pack()
 
+reveal_button = tk.Button(root, text="Reveal Password", command=reveal_button_click)
+reveal_button.pack()
 root.mainloop()
