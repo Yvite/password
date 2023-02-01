@@ -1,6 +1,10 @@
 import random
 import string
 
+charlength = int(input("How many characters do you want in your password? "))
+if charlength < 6:
+    print("Password must be at least 6 characters long.")
+    charlength = int(input("How many characters do you want in your password? "))
 def generate_password(length):
     password = []
     password.append(random.choice(string.ascii_uppercase))
@@ -12,6 +16,6 @@ def generate_password(length):
     password = ''.join(password)
     return password
 
-password = generate_password(10)
+password = generate_password(charlength)
 
-print("Generated password:", password, " ")
+print('Generated password:"', password,'"')
