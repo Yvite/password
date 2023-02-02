@@ -1,11 +1,45 @@
 <html>
+
+<head>
+  <title>Password Generator | Yvite</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+      body,h3,p,form,button {
+        align-items: center;
+        justify-content: center;
+      }
+    
+      form, h3,h1 {
+        text-align: center;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+    </style>
+    
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <br>
+  <h1>Password Generator</h1>
+  <br>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Generate Password">
+    <button type="submit" class="btn btn-primary">Generate Password</button>
   </form>
   {% if password %}
-    <p>Password: {{ password }}</p>
-    <p style="color: green;">{{ message }}</p>
+  <h3>Password: <p style="color: red; display: inline-block;">{{ password }}</h3>
+  </p>
+  <p>
+  <h3 style="color: green;">{{ message }}</h3>
+  </p>
   {% endif %}
+</body>
+
 </html>
