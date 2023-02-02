@@ -1,4 +1,4 @@
 from django import forms
 
 class PasswordForm(forms.Form):
-    length = forms.IntegerField(label='Password Length', min_value=6,)
+    length = forms.IntegerField(label='Password Length', min_value=6, max_value=42)
