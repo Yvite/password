@@ -1,0 +1,11 @@
+<html>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Generate Password">
+  </form>
+  {% if password %}
+    <p>Password: {{ password }}</p>
+    <p style="color: green;">{{ message }}</p>
+  {% endif %}
+</html>
